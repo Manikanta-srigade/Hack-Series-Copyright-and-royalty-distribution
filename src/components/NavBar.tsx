@@ -1,116 +1,77 @@
 
-import { useEffect, useState } from 'react';
-import { Menu, X } from 'lucide-react';
-import { Button } from "@/components/ui/button";
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
 
-// Import framer-motion
-<lov-add-dependency>framer-motion@10.16.4</lov-add-dependency>
-
-export const NavBar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  const navbarClasses = `fixed w-full z-50 transition-all duration-300 ease-in-out py-4 ${
-    scrolled ? 'bg-white/90 shadow-md backdrop-blur-sm' : 'bg-transparent'
-  }`;
-
-  const navLinks = [
-    { name: 'About us', path: '#about' },
-    { name: 'Instagram handle', path: '#instagram' },
-    { name: 'Twitter handle', path: '#twitter' },
-    { name: 'Facebook handle', path: '#facebook' },
-    { name: 'WHY US?', path: '#why-us' },
-  ];
+const NavBar = () => {
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className={navbarClasses}>
-      <nav className="container mx-auto px-4 flex justify-between items-center">
-        <motion.div 
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-lg font-bold"
-        >
-          <span className="font-cursive text-2xl">Creative Royalties</span>
-        </motion.div>
-
-        {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-8">
-          {navLinks.map((link, index) => (
-            <motion.a
-              key={link.name}
-              href={link.path}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-              className="nav-link font-medium text-black hover:text-gray-700"
-            >
-              {link.name}
-            </motion.a>
-          ))}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: navLinks.length * 0.1 }}
+    <nav className="fixed w-full z-50 bg-white bg-opacity-90 backdrop-blur-sm shadow-sm">
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center h-16">
+          <motion.a 
+            href="/"
+            className="text-xl font-bold font-cursive"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
           >
-            <Button className="button-3d bg-black text-white hover:bg-gray-800">
-              Connect your wallet
-            </Button>
-          </motion.div>
+            Creative Royalties
+          </motion.a>
+          
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex space-x-8">
+            {['About', 'Features', 'Community', 'Contact'].map((item, index) => (
+              <motion.a
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                className="nav-link font-medium"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                {item}
+              </motion.a>
+            ))}
+          </div>
+          
+          {/* Mobile Navigation Toggle */}
+          <div className="md:hidden">
+            <button 
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 rounded-md"
+            >
+              {isOpen ? <X /> : <Menu />}
+            </button>
+          </div>
         </div>
-
-        {/* Mobile Menu Button */}
-        <div className="md:hidden">
-          <Button onClick={toggleMenu} variant="ghost" size="icon">
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </Button>
-        </div>
-      </nav>
-
-      {/* Mobile Menu */}
-      {isMenuOpen && (
+      </div>
+      
+      {/* Mobile Navigation Menu */}
+      {isOpen && (
         <motion.div 
+          className="md:hidden"
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
-          className="md:hidden bg-white shadow-lg"
+          transition={{ duration: 0.3 }}
         >
-          <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-            {navLinks.map((link) => (
+          <div className="flex flex-col px-4 pt-2 pb-4 space-y-3 bg-white">
+            {['About', 'Features', 'Community', 'Contact'].map((item) => (
               <a
-                key={link.name}
-                href={link.path}
-                className="nav-link block py-2 font-medium"
-                onClick={() => setIsMenuOpen(false)}
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                className="nav-link font-medium py-2"
+                onClick={() => setIsOpen(false)}
               >
-                {link.name}
+                {item}
               </a>
             ))}
-            <Button className="button-3d bg-black text-white hover:bg-gray-800 w-full">
-              Connect your wallet
-            </Button>
           </div>
         </motion.div>
       )}
-    </header>
+    </nav>
   );
 };
 
