@@ -5,11 +5,15 @@ const Hero = () => {
   return (
     <div className="relative h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <img 
-          src="/lovable-uploads/ffa984a7-d0dc-4687-9ea7-5e0006b1753c.png" 
-          alt="Creative Background"
-          className="w-full h-full object-cover"
-        />
+        {/* Image with overlay to dim the background */}
+        <div className="relative w-full h-full">
+          <img 
+            src="/lovable-uploads/ffa984a7-d0dc-4687-9ea7-5e0006b1753c.png" 
+            alt="Creative Background"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+        </div>
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
@@ -20,7 +24,7 @@ const Hero = () => {
           className="text-center perspective-container"
         >
           <motion.h1 
-            className="text-4xl md:text-5xl lg:text-6xl font-cursive text-shadow mb-6"
+            className="text-4xl md:text-5xl lg:text-6xl font-cursive text-white text-shadow mb-6"
             initial={{ rotateX: 15 }}
             animate={{ rotateX: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
@@ -53,8 +57,8 @@ const Hero = () => {
           duration: 1.5
         }}
       >
-        <div className="w-8 h-12 rounded-full border-2 border-black flex justify-center pt-2">
-          <div className="w-1 h-3 bg-black rounded-full animate-pulse-subtle" />
+        <div className="w-8 h-12 rounded-full border-2 border-white flex justify-center pt-2">
+          <div className="w-1 h-3 bg-white rounded-full animate-pulse-subtle" />
         </div>
       </motion.div>
     </div>
