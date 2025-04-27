@@ -1,14 +1,12 @@
-
 import { motion } from 'framer-motion';
 
 const Hero = () => {
   return (
     <div className="relative h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
-        {/* Image with overlay to dim the background */}
         <div className="relative w-full h-full">
           <img 
-            src="/lovable-uploads/ffa984a7-d0dc-4687-9ea7-5e0006b1753c.png" 
+            src="/lovable-uploads/herooo.png" 
             alt="Creative Background"
             className="w-full h-full object-cover"
           />
@@ -23,7 +21,7 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-center perspective-container"
         >
-          <motion.h1 
+         <motion.h1 
             className="text-3xl md:text-4xl lg:text-5xl font-cursive text-white text-shadow mb-8"
             initial={{ rotateX: 15 }}
             animate={{ rotateX: 0 }}
@@ -31,7 +29,7 @@ const Hero = () => {
           >
             Dive deeper into the world of Authentic Creativity and Rightful Royalties
           </motion.h1>
-          
+
           <motion.div
             className="flex flex-col md:flex-row justify-center items-center gap-8 mt-16"
             initial={{ opacity: 0 }}
@@ -48,7 +46,6 @@ const Hero = () => {
         </motion.div>
       </div>
       
-      {/* Floating scroll indicator */}
       <motion.div 
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
         animate={{ y: [0, 10, 0] }}

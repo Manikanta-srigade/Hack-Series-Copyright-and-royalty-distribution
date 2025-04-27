@@ -16,7 +16,7 @@ const About = () => {
             <div className="perspective-container">
               <div className="card-3d rounded-xl overflow-hidden">
                 <img 
-                  src="/lovable-uploads/ffa984a7-d0dc-4687-9ea7-5e0006b1753c.png" 
+                  src="/lovable-uploads/herooo.png" 
                   alt="About Us" 
                   className="w-full h-auto rounded-xl"
                 />
